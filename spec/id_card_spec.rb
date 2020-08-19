@@ -9,8 +9,7 @@ RSpec.describe Generator do
   let!(:last_name) { 'Caesar' }
 
   it 'returns combined chars from first name and last name' do
-    #binding.pry; p 'debugging...'
-    expect(generator.generate_id).to eq('CAJI')
+    expect(generator.generate_id).to eq('CAJI202002196')
   end
 
   it 'returns the first two chars of the first name' do

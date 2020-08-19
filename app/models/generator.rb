@@ -11,7 +11,8 @@ class Generator
       first_chars,
       second_chars,
       joining_date.year,
-      month
+      month,
+      number,
     ].join
   end
 
@@ -29,11 +30,29 @@ class Generator
 
   private
 
+  def full_name
+    "#{@first_name} #{@last_name}"
+  end
+
   def joining_date
-    Time.local(2020)
+    Time.local(2020, 2)
   end
 
   def month
     sprintf("%02d", joining_date.month)
+  end
+
+  def number
+    database.dig(joining_date.year, joining_date.month, full_name)
+  end
+
+  def database
+    {
+      2020 => {
+        2 => {
+          "Jigarius Caesar" => 19
+        }
+      }
+    }
   end
 end
