@@ -9,7 +9,9 @@ class Generator
   def generate_id
     [
       first_chars,
-      second_chars
+      second_chars,
+      joining_date.year,
+      month
     ].join
   end
 
@@ -23,5 +25,15 @@ class Generator
 
   def first_two_chars(text)
     text.split('').first(2).join.upcase
+  end
+
+  private
+
+  def joining_date
+    Time.local(2020)
+  end
+
+  def month
+    sprintf("%02d", joining_date.month)
   end
 end

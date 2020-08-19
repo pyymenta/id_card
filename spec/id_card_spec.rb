@@ -1,5 +1,5 @@
 # frozen_string_literal: true
-
+require 'spec_helper'
 require_relative '../app/models/generator'
 
 RSpec.describe Generator do
@@ -8,8 +8,8 @@ RSpec.describe Generator do
   let!(:first_name) { 'Jigarius' }
   let!(:last_name) { 'Caesar' }
 
-  it 'does something' do
-    binding.pry; p 'debugging...'
+  it 'returns combined chars from first name and last name' do
+    #binding.pry; p 'debugging...'
     expect(generator.generate_id).to eq('CAJI')
   end
 
