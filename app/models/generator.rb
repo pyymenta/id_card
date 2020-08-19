@@ -10,9 +10,8 @@ class Generator
     [
       first_chars,
       second_chars,
-      joining_date.year,
-      month,
-      number,
+      numeric_part,
+      digit
     ].join
   end
 
@@ -30,6 +29,28 @@ class Generator
 
   private
 
+  def database
+    {
+      2020 => {
+        2 => {
+          "Jigarius Caesar" => 19
+        }
+      }
+    }
+  end
+
+  def digit
+    absolute_value = (odd_sum - even_sum).abs
+
+    return absolute_value if absolute_value <= 9
+
+    absolute_value % 10
+  end
+
+  def even_sum
+    numeric_part.split("").map.with_index { |number, index| index.even? ? number.to_i : 0 }.sum
+  end
+
   def full_name
     "#{@first_name} #{@last_name}"
   end
@@ -46,13 +67,11 @@ class Generator
     database.dig(joining_date.year, joining_date.month, full_name)
   end
 
-  def database
-    {
-      2020 => {
-        2 => {
-          "Jigarius Caesar" => 19
-        }
-      }
-    }
+  def numeric_part
+    [joining_date.year, month, number].join
+  end
+
+  def odd_sum
+    numeric_part.split("").map.with_index { |number, index| index.odd? ? number.to_i : 0 }.sum
   end
 end
