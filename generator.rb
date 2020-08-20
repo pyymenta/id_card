@@ -7,25 +7,14 @@ class Generator
     @code       = code
   end
 
-  def generate_id
-    [
-      first_chars,
-      second_chars,
-      numeric_part,
-      digit
-    ].join
+  def valid?
+    first_four_chars = [first_chars(@last_name, 2), first_chars(@first_name, 2)].join
+
+    first_chars(@code, 4) == first_four_chars && first_chars(@code.reverse, 1) == digit.to_s
   end
 
-  def first_chars
-    first_two_chars(@last_name)
-  end
-
-  def second_chars
-    first_two_chars(@first_name)
-  end
-
-  def first_two_chars(text)
-    text.split('').first(2).join.upcase
+  def first_chars(text, number)
+    text.split('').first(number).join.upcase
   end
 
   private
@@ -40,10 +29,6 @@ class Generator
 
   def even_sum
     numeric_part.split("").map.with_index { |number, index| index.even? ? number.to_i : 0 }.sum
-  end
-
-  def month
-    sprintf("%02d", joining_date.month)
   end
 
   def numeric_part

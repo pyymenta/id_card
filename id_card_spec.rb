@@ -3,20 +3,22 @@
 require_relative 'rspec'
 require_relative 'generator'
 
-first_name = 'Jigarius'
-last_name  = 'Caesar'
-code       = 'CAJI202002196'
-
-generator = Generator.new(first_name, last_name, code)
-
-it 'returns combined chars from first name and last name' do
-  expect(generator.generate_id).to eq('CAJI202002196')
+it 'is valid when match first and second pair of chars and last digit' do
+  expect(Generator.new('Jigarius', 'Caesar', 'CAJI202002196').valid?).to eq(true)
 end
 
-it 'returns the first two chars of the first name' do
-  expect(generator.first_chars).to eq('x')
+it 'validates first name' do
+  expect(Generator.new('Jxgarius', 'Caesar', 'CAJI202002196').valid?).to eq(false)
 end
 
-it 'returns the first two chars of the last name' do
-  expect(generator.second_chars).to eq('JI')
+it 'validates last name' do
+  expect(Generator.new('Jigarius', 'Cxesar', 'CAJI202002196').valid?).to eq(false)
+end
+
+it 'validates the digit' do
+  expect(Generator.new('Jigarius', 'Caesar', 'CAJI20200219X').valid?).to eq(false)
+end
+
+it 'returns the first x chars upcased' do
+  expect(Generator.new('Jigarius', 'Caesar', 'CAJI202002196').first_chars("Jigarius", 2)).to eq('JI')
 end
