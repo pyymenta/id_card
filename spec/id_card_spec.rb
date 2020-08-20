@@ -3,10 +3,11 @@ require 'spec_helper'
 require_relative '../app/models/generator'
 
 RSpec.describe Generator do
-  subject(:generator) { described_class.new(first_name, last_name) }
+  subject(:generator) { described_class.new(first_name, last_name, code) }
 
   let!(:first_name) { 'Jigarius' }
   let!(:last_name) { 'Caesar' }
+  let!(:code) { 'CAJI202002196' }
 
   it 'returns combined chars from first name and last name' do
     expect(generator.generate_id).to eq('CAJI202002196')

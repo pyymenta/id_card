@@ -1,9 +1,10 @@
 # frozen_string_literal: true
 
 class Generator
-  def initialize(first_name, last_name)
+  def initialize(first_name, last_name, code)
     @first_name = first_name
     @last_name  = last_name
+    @code       = code
   end
 
   def generate_id
@@ -29,16 +30,6 @@ class Generator
 
   private
 
-  def database
-    {
-      2020 => {
-        2 => {
-          "Jigarius Caesar" => 19
-        }
-      }
-    }
-  end
-
   def digit
     absolute_value = (odd_sum - even_sum).abs
 
@@ -51,24 +42,12 @@ class Generator
     numeric_part.split("").map.with_index { |number, index| index.even? ? number.to_i : 0 }.sum
   end
 
-  def full_name
-    "#{@first_name} #{@last_name}"
-  end
-
-  def joining_date
-    Time.local(2020, 2)
-  end
-
   def month
     sprintf("%02d", joining_date.month)
   end
 
-  def number
-    database.dig(joining_date.year, joining_date.month, full_name)
-  end
-
   def numeric_part
-    [joining_date.year, month, number].join
+    @code.slice(4, 8)
   end
 
   def odd_sum
