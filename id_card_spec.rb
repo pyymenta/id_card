@@ -1,12 +1,7 @@
 # frozen_string_literal: true
 
+require_relative 'rspec'
 require_relative 'generator'
-
-def expect(actual, expected)
-  raise("#{actual} != #{expected}") unless actual == expected
-
-  puts '.'
-end
 
 first_name = 'Jigarius'
 last_name  = 'Caesar'
@@ -14,7 +9,14 @@ code       = 'CAJI202002196'
 
 generator = Generator.new(first_name, last_name, code)
 
+it 'returns combined chars from first name and last name' do
+  expect(generator.generate_id).to eq('CAJI202002196')
+end
 
-expect(generator.generate_id, 'CAJI202002196')
-expect(generator.first_chars, 'CA')
-expect(generator.second_chars, 'JI')
+it 'returns the first two chars of the first name' do
+  expect(generator.first_chars).to eq('x')
+end
+
+it 'returns the first two chars of the last name' do
+  expect(generator.second_chars).to eq('JI')
+end
