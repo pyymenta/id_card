@@ -7,7 +7,7 @@ Expector = Struct.new(:actual) do
 end
 
 def it(doc)
-  result = yield(doc)
+  result = yield
 
   p "#{doc}: #{result}" unless result
 end
