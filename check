@@ -1,0 +1,15 @@
+#!/usr/bin/ruby
+
+require_relative 'generator'
+
+first_name = ARGV[0]
+last_name  = ARGV[1]
+code       = ARGV[2]
+
+raise("Missing first name!") if first_name.nil?
+raise("Missing last name!") if last_name.nil?
+raise("Missing code!") if code.nil?
+
+generator = Generator.new(first_name, last_name, code)
+
+generator.valid? ? 'PASS' : 'INVESTIGATE'
