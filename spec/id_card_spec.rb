@@ -1,6 +1,7 @@
 # frozen_string_literal: true
-require 'spec_helper'
-require_relative '../app/models/generator'
+
+require 'pry-byebug'
+require_relative '../generator'
 
 RSpec.describe Generator do
   subject(:generator) { described_class.new(first_name, last_name, code) }
