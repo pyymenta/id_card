@@ -17,5 +17,5 @@ def expect(value)
 end
 
 def eq(expected)
-  ->(action) { action == expected  }
+  ->(actual) { actual == expected  }
 end
