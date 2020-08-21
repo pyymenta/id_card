@@ -9,7 +9,7 @@ end
 def it(doc)
   result = yield
 
-  p "#{doc}: #{result}" unless result
+  p result ? "." : "#{doc}: #{result}"
 end
 
 def expect(value)
