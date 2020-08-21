@@ -12,4 +12,4 @@ raise("Missing code!") if code.nil?
 
 generator = Generator.new(first_name, last_name, code)
 
-generator.valid? ? 'PASS' : 'INVESTIGATE'
+p generator.valid? ? 'PASS' : 'INVESTIGATE'
